@@ -15,12 +15,12 @@ jobs:
 
       - name: step-1
         run: |
-              "Running step one of the workflow"
-              sleep 2s
-              echo "Finished running step one of the workflow"
+          "Running step one of the workflow"
+          sleep 5s
+          echo "Finished running step one of the workflow"
 
       - name: step-2
-        run: | 
-              echo "Running step two of the workflow"
-              sleep 2s
-              echo "Finished running step two of the workflow"
+        run: |
+          echo "Running step two of the workflow"
+          sleep 5s
+          echo "Finished running step two of the workflow"
