@@ -1,6 +1,9 @@
 name: learn-github-actions.yml
 run-name: ${{ github.actor }} is learning github actions
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
