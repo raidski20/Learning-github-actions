@@ -4,8 +4,13 @@ on:
   push:
     branches:
       - master
+
+# Ensure that only one workflow using same concurrency group is running at a time.
+concurrency:
+  group: build-deploy
+
 jobs:
-  check-bats-version:
+  build-deploy-update:
     runs-on: ubuntu-latest
     steps:
       # - uses: actions/checkout@v3
@@ -16,12 +21,12 @@ jobs:
       - name: step-1
         run: |
           echo "Running step one of the workflow"
-          sleep 5s
+          sleep 30s
           echo "Finished running step one of the workflow"
         
 
       - name: step-2
         run: |
           echo "Running step two of the workflow"
-          sleep 5s
+          sleep 30s
           echo "Finished running step two of the workflow"
