@@ -8,9 +8,19 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+      # - uses: actions/checkout@v3
+      #- uses: actions/setup-node@v3
+      #  with:
+      #    node-version: '14'
+
+      - name: step-1
+        run: |
+              "Running step one of the workflow"
+              sleep 2s
+              echo "Finished running step one of the workflow"
+
+      - name: step-2
+        run: | 
+              echo "Running step two of the workflow"
+              sleep 2s
+              echo "Finished running step two of the workflow"
