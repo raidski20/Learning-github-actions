@@ -8,6 +8,8 @@ on:
 # Ensure that only one workflow using same concurrency group is running at a time.
 concurrency:
   group: build-deploy
+  # Cancel the current workflow and execute the newest one
+  cancel-in-progress: yes
 
 jobs:
   build-deploy-update:
