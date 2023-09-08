@@ -28,7 +28,11 @@ jobs:
 #          name: compiled-website
 #          path: dist/**
 #          if-no-files-found: error
+      - run: |
+          echo '${{ toJson(github.event.commits) }}'
 
+      - run: |
+                echo '${{ toJson(github.event.commits[0]) }}'
       - run: |
           echo '${{ toJson(github.event) }}'
 
