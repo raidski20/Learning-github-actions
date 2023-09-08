@@ -34,7 +34,7 @@ jobs:
           echo "The Event properties are: "
 
       - run: |
-          echo ${{ toJson(github.event.json) }}
+          echo ${{ toJson(github.event) }}
 
       - run: |
           echo "Push event actor is: ${{ github.event.pusher.name }}"
