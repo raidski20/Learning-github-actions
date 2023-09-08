@@ -15,20 +15,16 @@ jobs:
   build-deploy-update:
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v3
-      #- uses: actions/setup-node@v3
-      #  with:
-      #    node-version: '14'
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-      - name: step-1
-        run: |
-          echo "Running step one of the workflow"
-          sleep 30s
-          echo "Finished running step one of the workflow"
-        
+      - run: npm install
+      - run: npm run build
 
-      - name: step-2
-        run: |
-          echo "Running step two of the workflow"
-          sleep 30s
-          echo "Finished running step two of the workflow"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: compiled-website
+          path: dist/**
+          if-no-files-found: error
