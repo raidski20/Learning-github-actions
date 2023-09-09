@@ -40,6 +40,10 @@ jobs:
       PRODUCTION_BRANCH: production
 
     steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: $PRODUCTION_BRANCH
+
       - uses: actions/download-artifact@v3
         with:
           name: compiled-website
@@ -49,8 +53,8 @@ jobs:
           git config user.email $HEAD_COMMIT_ACTOR_EMAIL
 
       - run: |
-          "git checkout $PRODUCTION_BRANCH"
-          "git add ."
+#          "git checkout $PRODUCTION_BRANCH"
+          git add .
       - run: |
           git commit -m "$HEAD_COMMIT_MESSAGE"
           git push origin $PRODUCTION_BRANCH
