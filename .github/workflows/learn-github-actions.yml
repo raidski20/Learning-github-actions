@@ -29,17 +29,17 @@ jobs:
           HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PRODUCTION_BRANCH: production
 
-      - run: git config user.name $HEAD_COMMIT_ACTOR_NAME
-      - run: git config user.email $HEAD_COMMIT_ACTOR_EMAIL
+#      - run: git config user.name $HEAD_COMMIT_ACTOR_NAME
+#      - run: git config user.email $HEAD_COMMIT_ACTOR_EMAIL
+#
+#      - run: git checkout $PRODUCTION_BRANCH"
+#      - run: git add .
+#
+#      - run: git commit -m "$HEAD_COMMIT_MESSAGE
+#      - run: git push origin $PRODUCTION_BRANCH
 
-      - run: git checkout $PRODUCTION_BRANCH"
-      - run: git add .
-
-      - run: git commit -m "$HEAD_COMMIT_MESSAGE
-      - run: git push origin $PRODUCTION_BRANCH
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: compiled-website
-          path: dist/**
-          if-no-files-found: error
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: compiled-website
+#          path: dist/**
+#          if-no-files-found: error
