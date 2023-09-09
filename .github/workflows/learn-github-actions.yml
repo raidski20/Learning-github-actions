@@ -44,17 +44,13 @@ jobs:
         with:
           name: compiled-website
 
-      - run: ls
+      - run: |
+          git config user.name $HEAD_COMMIT_ACTOR_NAME
+          git config user.email $HEAD_COMMIT_ACTOR_EMAIL
 
-      - run: ls -R
-
-#      - run: |
-#          git config user.name $HEAD_COMMIT_ACTOR_NAME
-#          git config user.email $HEAD_COMMIT_ACTOR_EMAIL
-#
-#      - run: |
-#          "git checkout $PRODUCTION_BRANCH"
-#          "git add ."
-#      - run: |
-#          git commit -m "$HEAD_COMMIT_MESSAGE"
-#          git push origin $PRODUCTION_BRANCH
+      - run: |
+          "git checkout $PRODUCTION_BRANCH"
+          "git add ."
+      - run: |
+          git commit -m "$HEAD_COMMIT_MESSAGE"
+          git push origin $PRODUCTION_BRANCH
