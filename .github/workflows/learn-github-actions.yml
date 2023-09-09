@@ -22,25 +22,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - run: npm install
-      - run: npm run build
-
-      - run: |
-          git config user.name $HEAD_COMMIT_ACTOR_NAME
-          git config user.email $HEAD_COMMIT_ACTOR_EMAIL
-
-      - run: |
-          "git add ."
-      - run: |
-          git commit -m "$HEAD_COMMIT_MESSAGE"
-          git push origin $PRODUCTION_BRANCH
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: compiled-website
-          path: dist/**
-          if-no-files-found: error
+      - run: git version
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: '18'
+#
+#      - run: npm install
+#      - run: npm run build
+#
+#      - run: |
+#          git config user.name $HEAD_COMMIT_ACTOR_NAME
+#          git config user.email $HEAD_COMMIT_ACTOR_EMAIL
+#
+#      - run: |
+#          "git add ."
+#      - run: |
+#          git commit -m "$HEAD_COMMIT_MESSAGE"
+#          git push origin $PRODUCTION_BRANCH
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: compiled-website
+#          path: dist/**
+#          if-no-files-found: error
