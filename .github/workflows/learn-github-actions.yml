@@ -23,6 +23,24 @@ jobs:
       - run: npm install
       - run: npm run build
 
+      - env:
+          HEAD_COMMIT_ACTOR_NAME: ${{ github.event.head_commit.author.name }}
+          HEAD_COMMIT_ACTOR_EMAIL: ${{ github.event.head_commit.author.email }}
+          HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          PRODUCTION_BRANCH: production
+
+      - run:
+          git config user.name $HEAD_COMMIT_ACTOR_NAME
+          git config user.email $HEAD_COMMIT_ACTOR_EMAIL
+
+      - run: |
+          "git checkout $PRODUCTION_BRANCH"
+          "git add ."
+
+      - run: | 
+          git commit -m "$HEAD_COMMIT_MESSAGE"
+          git push origin $PRODUCTION_BRANCH
+
       - uses: actions/upload-artifact@v3
         with:
           name: compiled-website
