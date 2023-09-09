@@ -29,7 +29,7 @@ jobs:
           HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PRODUCTION_BRANCH: production
 
-      - run:
+      - run: |
           git config user.name $HEAD_COMMIT_ACTOR_NAME
           git config user.email $HEAD_COMMIT_ACTOR_EMAIL
 
