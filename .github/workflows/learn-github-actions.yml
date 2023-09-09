@@ -12,8 +12,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-deploy-update:
+  build-project-job:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: npm install
+      - run: npm run build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: compiled-website
+          path: dist/**
+          if-no-files-found: error
+
+  push-to-production-job:
+    needs: build-project-job
+    runs-on: ubuntu-latest
+
     env:
       HEAD_COMMIT_ACTOR_NAME: ${{ github.event.head_commit.author.name }}
       HEAD_COMMIT_ACTOR_EMAIL: ${{ github.event.head_commit.author.email }}
@@ -21,27 +40,21 @@ jobs:
       PRODUCTION_BRANCH: production
 
     steps:
-      - uses: actions/checkout@v3
-      - run: git version
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: '18'
-#
-#      - run: npm install
-#      - run: npm run build
-#
+      - uses: actions/download-artifact@v3
+        with:
+          name: compiled-website
+
+      - run: ls
+
+      - run: ls -R
+
 #      - run: |
 #          git config user.name $HEAD_COMMIT_ACTOR_NAME
 #          git config user.email $HEAD_COMMIT_ACTOR_EMAIL
 #
 #      - run: |
+#          "git checkout $PRODUCTION_BRANCH"
 #          "git add ."
 #      - run: |
 #          git commit -m "$HEAD_COMMIT_MESSAGE"
 #          git push origin $PRODUCTION_BRANCH
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: compiled-website
-#          path: dist/**
-#          if-no-files-found: error
