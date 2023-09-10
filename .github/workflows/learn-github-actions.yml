@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: production
+          ref: ${{ env.PRODUCTION_BRANCH }}
 
       - uses: actions/download-artifact@v3
         with:
