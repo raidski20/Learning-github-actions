@@ -32,6 +32,9 @@ jobs:
   push-to-production-job:
     needs: build-project-job
     runs-on: ubuntu-latest
+    permissions:
+      # Allow workflow to write content
+      contents: write
 
     env:
       HEAD_COMMIT_ACTOR_NAME: ${{ github.event.head_commit.author.name }}
